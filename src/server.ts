@@ -8,7 +8,7 @@ const app: Express = express();
 
 app.use(express.json());
 
-app.use(routes);
+app.use('api/shipping', routes);
 
 app.use(() => {
     throw new NotFoundError();
