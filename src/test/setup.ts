@@ -1,5 +1,6 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import { ServiceSeeder } from '../seeders/ServiceSeeder';
 
 let mongo: any;
 
@@ -16,6 +17,8 @@ beforeEach(async () => {
     for (let collection of collections) {
         await collection.deleteMany({});
     }
+
+    await ServiceSeeder();
 });
 
 afterAll(async () => {

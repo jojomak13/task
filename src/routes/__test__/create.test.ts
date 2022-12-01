@@ -2,20 +2,21 @@ import request from 'supertest';
 import app from '../../server';
 
 it('return with 201 if shipping request created', async () => {
+
     await request(app)
         .post('/api/shipping')
         .send({
-            service: 'ups',
+            service: 'fedex',
             shippingType: 'fedexGroud',
             width: 12.5,
             height: 12.5,
             length: 12.5,
             weight: 5.0,
         })
-        .expect(201);
+        .expect(201)
 })
 
-it('returns with 401 with invalid service type', async () => {
+it('returns with 400 with invalid service type', async () => {
     await request(app)
         .post('/api/shipping')
         .send({
@@ -26,10 +27,10 @@ it('returns with 401 with invalid service type', async () => {
             length: 12.5,
             weight: 5.0,
         })
-        .expect(401);
+        .expect(400);
 })
 
-it('returns with 401 with invalid shipping type', async () => {
+it('returns with 400 with invalid shipping type', async () => {
     await request(app)
         .post('/api/shipping')
         .send({
@@ -40,10 +41,10 @@ it('returns with 401 with invalid shipping type', async () => {
             length: 12.5,
             weight: 5.0,
         })
-        .expect(401);
+        .expect(400);
 })
 
-it('returns with 401 with invalid dimensions', async () => {
+it('returns with 400 with invalid dimensions', async () => {
     await request(app)
         .post('/api/shipping')
         .send({
@@ -54,10 +55,10 @@ it('returns with 401 with invalid dimensions', async () => {
             length: 7.0,
             weight: 5.0,
         })
-        .expect(401);
+        .expect(400);
 })
 
-it('returns with 401 with invalid weight', async () => {
+it('returns with 400 with invalid weight', async () => {
     await request(app)
         .post('/api/shipping')
         .send({
@@ -68,12 +69,12 @@ it('returns with 401 with invalid weight', async () => {
             length: 12.5,
             weight: -5,
         })
-        .expect(401);
+        .expect(400);
 })
 
-it('returns with 401 with required fields', async () => {
+it('returns with 400 with required fields', async () => {
     await request(app)
         .post('/api/shipping')
         .send({})
-        .expect(401);
+        .expect(400);
 })
