@@ -1,7 +1,7 @@
 # Shipping Service
 
-## Start Service 🚀
-1. add in you `env` variable `MONGO_URI` variable with the connection string eg. 
+## Run The App 🚀
+1. add in your `env` variable `MONGO_URI` variable with the connection string eg. 
 ```
 export MONGO_URI=mongodb://localhost:27017/shipping
 ``` 
