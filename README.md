@@ -45,3 +45,7 @@
 2. run `cd task`
 3. run `sh ./install.sh`
 4. run `php artisan serve`
+
+
+## Postman Collection
+you could find it on the root directory with name `Task.postman_collection.json`
