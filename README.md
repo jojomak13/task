@@ -49,3 +49,6 @@
 
 ## Postman Collection
 you could find it on the root directory with name `Task.postman_collection.json`
+
+## Testing
+run `php artisan test`
