@@ -15,7 +15,7 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id' => $this->getRouteKey(),
             'name' => $this->name,
             'email' => $this->email,
             'token' => $this->createToken(request()->device_name)->accessToken,

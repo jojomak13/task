@@ -16,9 +16,9 @@ use App\Http\Controllers\Api;
 */
 
 // Auth
-Route::prefix('auth')->group(function () {
-    Route::post('login', [Api\Auth\LoginController::class, 'login']);
-    Route::post('register', Api\Auth\RegisterController::class);
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('login', [Api\Auth\LoginController::class, 'login'])->name('login');
+    Route::post('register', Api\Auth\RegisterController::class)->name('register');
 });
 
 
@@ -27,12 +27,12 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/me', function (Request $request) {
         return $request->user();
-    });
+    })->name('profile');
 
     Route::apiResource('products', Api\ProductController::class)->except(['show', 'index']);
 });
 
-Route::get('categories', Api\CategoryController::class);
+Route::get('categories', Api\CategoryController::class)->name('categories.index');
 
 Route::get('products', [Api\ProductController::class, 'index'])->name('products.index');
 Route::get('products/{product}', [Api\ProductController::class, 'show'])->name('products.shows');
