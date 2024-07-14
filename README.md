@@ -29,7 +29,7 @@
 |Update Product|**POST**|`/products/{id}`|`[name, description, price, category_id]`|
 
 
-## Running The App 🚀 [Hard way]
+## Running The App [Hard way]
 1. run `git clone https://github.com/jojomak13/task`
 2. run `cd task`
 3. run `composer install`
@@ -40,8 +40,8 @@
 8. run `php artisan serve`
 
 
-## Running The App 🚀 [Easy Way 🚨]
+## Running The App 🚀 🚨 [Easy Way]
 1. run `git clone https://github.com/jojomak13/task`
 2. run `cd task`
-3. run `sh ./install`
+3. run `sh ./install.sh`
 4. run `php artisan serve`
