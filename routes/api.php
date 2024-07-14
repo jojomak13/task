@@ -35,4 +35,4 @@ Route::middleware('auth:api')->group(function () {
 Route::get('categories', Api\CategoryController::class)->name('categories.index');
 
 Route::get('products', [Api\ProductController::class, 'index'])->name('products.index');
-Route::get('products/{product}', [Api\ProductController::class, 'show'])->name('products.shows');
+Route::get('products/{product}', [Api\ProductController::class, 'show'])->name('products.show');

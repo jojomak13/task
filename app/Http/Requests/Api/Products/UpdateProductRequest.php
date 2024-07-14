@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Jenssegers\Optimus\Optimus;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -27,5 +28,15 @@ class UpdateProductRequest extends FormRequest
             'price' => ['sometimes', 'numeric', 'gt:0'],
             'category_id' => ['sometimes', 'exists:categories,id'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'category_id' => app(Optimus::class)->decode($this->category_id),
+        ]);
     }
 }
