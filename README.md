@@ -22,7 +22,7 @@
 
 |Name|Method|Path|Request Body|
 |---|---|---|---|
-|List Products|**GET**|`/products`|`[]`|
+|List Products|**GET**|`/products`|`[category_id, category_name, name, order_by, direction]`|
 |Show Product|**GET**|`/products/{id}`|`[]`|
 |Delete Product|**DELETE**|`/products/{id}`|`[]`|
 |Create Product|**POST**|`/products`|`[name, description, price, category_id]`|
