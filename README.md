@@ -4,7 +4,7 @@
 
 |Name|Method|Path|
 |---|---|---|
-|Users|**POST**|`/api/v1/users`|
+|Users|**GET**|`/api/v1/users`|
 
 ## Seeder Command
 All you need is to run `php artisan seed:transaction` and you will see the magic 🪄
