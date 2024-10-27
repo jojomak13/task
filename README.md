@@ -24,3 +24,7 @@ All you need is to run `php artisan seed:transaction` and you will see the magic
 2. run `cd task`
 3. run `sh ./install.sh`
 4. run `php artisan serve`
+
+
+## Note 
+You will find sample JSON files for testing inside the `samples` directory.
