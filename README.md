@@ -6,6 +6,9 @@
 |---|---|---|
 |Users|**POST**|`/api/v1/users`|
 
+## Seeder Command
+All you need is to run `php artisan seed:transaction` and you will see the magic 🪄
+
 ## Running The App [Hard way]
 1. run `git clone https://github.com/jojomak13/task`
 2. run `cd task`
