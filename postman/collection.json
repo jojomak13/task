@@ -1,0 +1,301 @@
+{
+    "info": {
+      "name": "E-Commerce API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": "A collection of API endpoints for the E-Commerce API."
+    },
+    "item": [
+      {
+        "name": "Authentication",
+        "item": [
+          {
+            "name": "Sign Up",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"password\": \"StrongPassword123!\"\n}"
+              },
+              "url": {
+                "raw": "{{baseUrl}}/api/signup",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "signup"]
+              },
+              "description": "Register a new user"
+            },
+            "response": []
+          },
+          {
+            "name": "Login",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"StrongPassword123!\"\n}"
+              },
+              "url": {
+                "raw": "{{baseUrl}}/api/login",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "login"]
+              },
+              "description": "Login with existing credentials"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "User",
+        "item": [
+          {
+            "name": "Add Credit Card",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"stripe_token\": \"tok_visa\"\n}"
+              },
+              "url": {
+                "raw": "{{baseUrl}}/api/user/payment-methods",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "user", "payment-methods"]
+              },
+              "description": "Add a credit card for a user"
+            },
+            "response": []
+          },
+          {
+            "name": "Delete Credit Card",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{baseUrl}}/api/user/payment-methods/1",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "user", "payment-methods", "1"]
+              },
+              "description": "Delete a credit card"
+            },
+            "response": []
+          },
+          {
+            "name": "List Products",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{baseUrl}}/api/user/products",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "user", "products"]
+              },
+              "description": "List all available products"
+            },
+            "response": []
+          },
+          {
+            "name": "Buy Products",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"payment_method_id\": 1,\n    \"items\": [\n        {\n            \"product_id\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"product_id\": 3,\n            \"quantity\": 1\n        }\n    ]\n}"
+              },
+              "url": {
+                "raw": "{{baseUrl}}/api/user/purchase",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "user", "purchase"]
+              },
+              "description": "Purchase multiple products"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Order History",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{baseUrl}}/api/user/orders",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "user", "orders"]
+              },
+              "description": "Get user's order history"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Admin",
+        "item": [
+          {
+            "name": "Create Product",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{adminToken}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"Smartphone X\",\n    \"description\": \"Latest smartphone with advanced features\",\n    \"price\": 699.99,\n    \"stock\": 50\n}"
+              },
+              "url": {
+                "raw": "{{baseUrl}}/api/admin/products",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "admin", "products"]
+              },
+              "description": "Create a new product"
+            },
+            "response": []
+          },
+          {
+            "name": "Update Product",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{adminToken}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"Smartphone X Pro\",\n    \"description\": \"Latest smartphone with premium features\",\n    \"price\": 899.99,\n    \"stock\": 30\n}"
+              },
+              "url": {
+                "raw": "{{baseUrl}}/api/admin/products/1",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "admin", "products", "1"]
+              },
+              "description": "Update an existing product"
+            },
+            "response": []
+          },
+          {
+            "name": "Delete Product",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{adminToken}}"
+                }
+              ],
+              "url": {
+                "raw": "{{baseUrl}}/api/admin/products/1",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "admin", "products", "1"]
+              },
+              "description": "Delete a product"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Product Sales",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{adminToken}}"
+                }
+              ],
+              "url": {
+                "raw": "{{baseUrl}}/api/admin/product-sales?from_date=2023-01-01&to_date=2023-12-31&username=testuser",
+                "host": ["{{baseUrl}}"],
+                "path": ["api", "admin", "product-sales"],
+                "query": [
+                  {
+                    "key": "from_date",
+                    "value": "2023-01-01"
+                  },
+                  {
+                    "key": "to_date",
+                    "value": "2023-12-31"
+                  },
+                  {
+                    "key": "username",
+                    "value": "testuser"
+                  }
+                ]
+              },
+              "description": "Get product sales with filtration"
+            },
+            "response": []
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:8000"
+      },
+      {
+        "key": "token",
+        "value": "your_jwt_token_here"
+      },
+      {
+        "key": "adminToken",
+        "value": "your_admin_jwt_token_here"
+      }
+    ]
+  }
