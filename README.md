@@ -3,7 +3,7 @@
 This document provides information on how to use the E-Commerce API for user management, product operations, and payment processing.
 
 ## Installation
-It will be easy to install it all you need is to have docker installed on you machine after that run
+It will be easy to install it all you need is to have docker installed on your machine after that run
 
 1. run `cp .env.example .env`
 2. run `docker-compoer up -d`
