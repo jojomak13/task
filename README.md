@@ -1,59 +1,34 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Part 1: System design & architecture
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### 1. How would you structure this Laravel application as it continues to grow?
 
-## About Laravel
+    - For a large laravel project, i would like to split it into module by domain, it could be dependant packages that each team can be responsible of it or modules in folder structure
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    - Regarding where the logic should lives, it should be moved entirely from the controller class, and split it into services classes by its domain also i would to depend on DTOs a lot because in php we don't know what is been passed through arrays so it is better to use something like DTO
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    - For maintainability i would like to depend on separating boundaries between modules that we mentioned before using interfaces (Contract) to decrease decoupling as we could
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. What would you refactor first, and why?
 
-## Learning Laravel
+    - I would like to start with the most critical part in refactor or to be more precise, i would start with the most part that we need to add features for it and it is currently hard and have many non intendant issues
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 3. How would you approach performance and scalability?
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    - In this scenario i would to start using cache aggressively, because it will help a lot on reducing database hits until we make the system more stable and more memory efficient, also we could start moving long requests to queue using horizon for actions like sending emails, notifications and bulk actions
 
-## Laravel Sponsors
+    - I don't want to move forward on something like micro service trend,
+    or like fully sharding for database and all of those critical decisions
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+# Part 2: Focused code example
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+    - Please check the code on the `app` directory
 
-## Contributing
+# Part 3: Trade-offs & reflection
+    - I designed the Inventory service to handle single-product checks to keep the API clean and reusable. To avoid performance issues in the loop, I would implement a 'Repository' pattern inside the Inventory domain that fetches all required IDs in a single query before the loop begins. In a real world example (production) i would try to move part of the complex logic into queue like order processing for it's status and generating invoices
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    - If i have time maybe we could build something like Idempotency key to be send on each critical endpoint like payment endpoint to prevent double requests
 
-## Code of Conduct
+    - As mentioned before i will ignoring thinking on scaling to microservices
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    - Yes, i used AI to prepare the bold lines and high level thinking and just taking multiple opinions from the other, otherwise all of this docs had been written by me
